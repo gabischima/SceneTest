@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0CE26CA7-1FA7-493E-8C92-3A8CEBC62B3B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SceneTest4</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E9C5EA29173942F44024FD971E26F8257545E8FF</key>
+		<string>https://github.com/gabischima/SceneTest.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SceneTest4.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E9C5EA29173942F44024FD971E26F8257545E8FF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/gabischima/SceneTest.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E9C5EA29173942F44024FD971E26F8257545E8FF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E9C5EA29173942F44024FD971E26F8257545E8FF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SceneTest4</string>
+		</dict>
+	</array>
+</dict>
+</plist>

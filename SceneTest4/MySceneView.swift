@@ -43,11 +43,17 @@ class MySceneView: SCNScene {
         let moon = SCNSphere(radius: 0.3)
         moon.firstMaterial!.diffuse.contents = UIColor.greenColor()
         let moonNode = SCNNode(geometry: moon)
-        let mooonRotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+        let moonRotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
         moonNode.position = SCNVector3Make(2, 0, 0)
-        let repeatedMoonRotate = SCNAction.repeatActionForever(mooonRotate)
+        let repeatedMoonRotate = SCNAction.repeatActionForever(moonRotate)
         moonNode.runAction(repeatedMoonRotate)
         planetNode.addChildNode(moonNode)
+        
+        let ring = SCNTube(innerRadius: 1.5, outerRadius: 2, height: 0.01)
+        ring.firstMaterial!.diffuse.contents = UIColor.brownColor()
+        let ringNode = SCNNode(geometry: ring)
+        ringNode.position = SCNVector3Make(0, 0, 0)
+        planetNode.addChildNode(ringNode)
     }
     
     override init() {
