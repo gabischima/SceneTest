@@ -52,8 +52,15 @@ class MySceneView: SCNScene {
         let ring = SCNTube(innerRadius: 1.5, outerRadius: 2, height: 0.01)
         ring.firstMaterial!.diffuse.contents = UIColor.brownColor()
         let ringNode = SCNNode(geometry: ring)
-        ringNode.position = SCNVector3Make(0, 0, 0)
+        let ringNode2 = SCNNode(geometry: ring)
+
+       // ringNode.position = SCNVector3Make(0, 0, 0)
+        var pifloat = Float(M_PI)
+        ringNode.transform = SCNMatrix4MakeRotation( pifloat / 3, 0, 1, 1)
+        ringNode2.transform = SCNMatrix4MakeRotation( 3*pifloat / 2, 0, 1, 1)
         planetNode.addChildNode(ringNode)
+        planetNode.addChildNode(ringNode2)
+
     }
     
     override init() {
