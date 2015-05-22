@@ -15,7 +15,22 @@
 		063433181B043FFC00D164A7 /* SceneTest4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063433171B043FFC00D164A7 /* SceneTest4Tests.swift */; };
 		063433221B04400E00D164A7 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063433211B04400E00D164A7 /* SceneKit.framework */; };
 		063433241B04404C00D164A7 /* MySceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063433231B04404C00D164A7 /* MySceneView.swift */; };
-		063433261B04421D00D164A7 /* texture_sun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 063433251B04421D00D164A7 /* texture_sun.jpg */; };
+		06A6FF631B0D3DB500196E91 /* universo.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A6FF621B0D3DB500196E91 /* universo.png */; };
+		06A6FF6C1B0E639400196E91 /* universo1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 06A6FF661B0E634B00196E91 /* universo1.tga */; };
+		06A6FF6D1B0E639700196E91 /* universo2.tga in Resources */ = {isa = PBXBuildFile; fileRef = 06A6FF671B0E634B00196E91 /* universo2.tga */; };
+		06A6FF6E1B0E639A00196E91 /* universo3.tga in Resources */ = {isa = PBXBuildFile; fileRef = 06A6FF681B0E634B00196E91 /* universo3.tga */; };
+		06A6FF6F1B0E639C00196E91 /* universo4.tga in Resources */ = {isa = PBXBuildFile; fileRef = 06A6FF691B0E634B00196E91 /* universo4.tga */; };
+		06A6FF701B0E639F00196E91 /* universo5.tga in Resources */ = {isa = PBXBuildFile; fileRef = 06A6FF6A1B0E634B00196E91 /* universo5.tga */; };
+		06A6FF711B0E63A100196E91 /* universo6.tga in Resources */ = {isa = PBXBuildFile; fileRef = 06A6FF6B1B0E634B00196E91 /* universo6.tga */; };
+		06CFED5F1B0EA09000E7481B /* texture_sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED5E1B0EA09000E7481B /* texture_sun.png */; };
+		06CFED631B0EA97400E7481B /* texture_ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED621B0EA97400E7481B /* texture_ring.png */; };
+		06CFED661B0EC8D300E7481B /* universe.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED641B0EC8D300E7481B /* universe.png */; };
+		06CFED671B0EC8D300E7481B /* universe2.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED651B0EC8D300E7481B /* universe2.png */; };
+		06CFED6A1B0ECE3800E7481B /* MyParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED681B0ECE3800E7481B /* MyParticleSystem.scnp */; };
+		06CFED6B1B0ECE3800E7481B /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED691B0ECE3800E7481B /* star.png */; };
+		06CFED731B0EE57600E7481B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06CFED721B0EE57600E7481B /* SpriteKit.framework */; };
+		06CFED751B0F670300E7481B /* planet_water_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED741B0F670300E7481B /* planet_water_texture.png */; };
+		06CFED771B0F68FE00E7481B /* cloud_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED761B0F68FE00E7481B /* cloud_texture.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +56,23 @@
 		063433171B043FFC00D164A7 /* SceneTest4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTest4Tests.swift; sourceTree = "<group>"; };
 		063433211B04400E00D164A7 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		063433231B04404C00D164A7 /* MySceneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySceneView.swift; sourceTree = "<group>"; };
-		063433251B04421D00D164A7 /* texture_sun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture_sun.jpg; sourceTree = "<group>"; };
+		06A6FF621B0D3DB500196E91 /* universo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = universo.png; sourceTree = "<group>"; };
+		06A6FF661B0E634B00196E91 /* universo1.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = universo1.tga; sourceTree = "<group>"; };
+		06A6FF671B0E634B00196E91 /* universo2.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = universo2.tga; sourceTree = "<group>"; };
+		06A6FF681B0E634B00196E91 /* universo3.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = universo3.tga; sourceTree = "<group>"; };
+		06A6FF691B0E634B00196E91 /* universo4.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = universo4.tga; sourceTree = "<group>"; };
+		06A6FF6A1B0E634B00196E91 /* universo5.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = universo5.tga; sourceTree = "<group>"; };
+		06A6FF6B1B0E634B00196E91 /* universo6.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = universo6.tga; sourceTree = "<group>"; };
+		06A6FF721B0E66C000196E91 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		06CFED5E1B0EA09000E7481B /* texture_sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_sun.png; sourceTree = "<group>"; };
+		06CFED621B0EA97400E7481B /* texture_ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_ring.png; sourceTree = "<group>"; };
+		06CFED641B0EC8D300E7481B /* universe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = universe.png; sourceTree = "<group>"; };
+		06CFED651B0EC8D300E7481B /* universe2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = universe2.png; sourceTree = "<group>"; };
+		06CFED681B0ECE3800E7481B /* MyParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = MyParticleSystem.scnp; sourceTree = "<group>"; };
+		06CFED691B0ECE3800E7481B /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		06CFED721B0EE57600E7481B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		06CFED741B0F670300E7481B /* planet_water_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet_water_texture.png; sourceTree = "<group>"; };
+		06CFED761B0F68FE00E7481B /* cloud_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud_texture.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06CFED731B0EE57600E7481B /* SpriteKit.framework in Frameworks */,
 				063433221B04400E00D164A7 /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +98,8 @@
 		063432F31B043FFB00D164A7 = {
 			isa = PBXGroup;
 			children = (
+				06CFED721B0EE57600E7481B /* SpriteKit.framework */,
+				06A6FF721B0E66C000196E91 /* AVFoundation.framework */,
 				063433211B04400E00D164A7 /* SceneKit.framework */,
 				063432FE1B043FFB00D164A7 /* SceneTest4 */,
 				063433141B043FFC00D164A7 /* SceneTest4Tests */,
@@ -87,8 +121,10 @@
 			children = (
 				063433011B043FFB00D164A7 /* AppDelegate.swift */,
 				063433031B043FFB00D164A7 /* ViewController.swift */,
-				063433051B043FFB00D164A7 /* Main.storyboard */,
 				063433231B04404C00D164A7 /* MySceneView.swift */,
+				06CFED681B0ECE3800E7481B /* MyParticleSystem.scnp */,
+				06CFED691B0ECE3800E7481B /* star.png */,
+				063433051B043FFB00D164A7 /* Main.storyboard */,
 				063433081B043FFB00D164A7 /* Images.xcassets */,
 				0634330A1B043FFB00D164A7 /* LaunchScreen.xib */,
 				063432FF1B043FFB00D164A7 /* Supporting Files */,
@@ -99,7 +135,19 @@
 		063432FF1B043FFB00D164A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				063433251B04421D00D164A7 /* texture_sun.jpg */,
+				06CFED641B0EC8D300E7481B /* universe.png */,
+				06CFED651B0EC8D300E7481B /* universe2.png */,
+				06A6FF661B0E634B00196E91 /* universo1.tga */,
+				06A6FF671B0E634B00196E91 /* universo2.tga */,
+				06A6FF681B0E634B00196E91 /* universo3.tga */,
+				06A6FF691B0E634B00196E91 /* universo4.tga */,
+				06A6FF6A1B0E634B00196E91 /* universo5.tga */,
+				06A6FF6B1B0E634B00196E91 /* universo6.tga */,
+				06A6FF621B0D3DB500196E91 /* universo.png */,
+				06CFED5E1B0EA09000E7481B /* texture_sun.png */,
+				06CFED621B0EA97400E7481B /* texture_ring.png */,
+				06CFED741B0F670300E7481B /* planet_water_texture.png */,
+				06CFED761B0F68FE00E7481B /* cloud_texture.png */,
 				063433001B043FFB00D164A7 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -202,10 +250,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				063433261B04421D00D164A7 /* texture_sun.jpg in Resources */,
+				06CFED751B0F670300E7481B /* planet_water_texture.png in Resources */,
+				06A6FF701B0E639F00196E91 /* universo5.tga in Resources */,
+				06A6FF6D1B0E639700196E91 /* universo2.tga in Resources */,
+				06A6FF6F1B0E639C00196E91 /* universo4.tga in Resources */,
+				06CFED661B0EC8D300E7481B /* universe.png in Resources */,
+				06A6FF631B0D3DB500196E91 /* universo.png in Resources */,
+				06CFED6B1B0ECE3800E7481B /* star.png in Resources */,
+				06CFED671B0EC8D300E7481B /* universe2.png in Resources */,
+				06CFED5F1B0EA09000E7481B /* texture_sun.png in Resources */,
+				06CFED771B0F68FE00E7481B /* cloud_texture.png in Resources */,
+				06CFED6A1B0ECE3800E7481B /* MyParticleSystem.scnp in Resources */,
 				063433071B043FFB00D164A7 /* Main.storyboard in Resources */,
 				0634330C1B043FFB00D164A7 /* LaunchScreen.xib in Resources */,
+				06A6FF6E1B0E639A00196E91 /* universo3.tga in Resources */,
+				06A6FF711B0E63A100196E91 /* universo6.tga in Resources */,
 				063433091B043FFB00D164A7 /* Images.xcassets in Resources */,
+				06A6FF6C1B0E639400196E91 /* universo1.tga in Resources */,
+				06CFED631B0EA97400E7481B /* texture_ring.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,9 +416,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SceneTest4/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SceneTest4/SceneTest4-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -364,9 +429,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SceneTest4/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SceneTest4/SceneTest4-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -423,6 +490,7 @@
 				0634331D1B043FFC00D164A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0634331E1B043FFC00D164A7 /* Build configuration list for PBXNativeTarget "SceneTest4Tests" */ = {
 			isa = XCConfigurationList;
@@ -431,6 +499,7 @@
 				063433201B043FFC00D164A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
