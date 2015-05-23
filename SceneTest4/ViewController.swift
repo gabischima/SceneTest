@@ -15,6 +15,10 @@ class ViewController: UIViewController {
     
     var scnView: SCNView!
     
+    var currentAngle: Float = 0.0
+    
+    var geometryNode: SCNNode = SCNNode()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,12 +26,11 @@ class ViewController: UIViewController {
         
         scnView.scene = MySceneView();
         scnView.backgroundColor = UIColor.blackColor()
-
+//
 //        let cameraNode = SCNNode()
 //        cameraNode.camera = SCNCamera()
-//        cameraNode.position = SCNVector3(x: 0, y: 30, z: 30)
-//        cameraNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI/6))
-//        scnView.pointOfView = cameraNode
+//        cameraNode.position = SCNVector3(x: 0, y: -5, z: 10)
+//        scnView.scene?.rootNode.addChildNode(cameraNode)
         
 //        var image = UIImage(named: "universo.png")
 //        var foto = image?.CGImage
@@ -35,44 +38,59 @@ class ViewController: UIViewController {
         scnView.autoenablesDefaultLighting = true
         scnView.allowsCameraControl = true
         
-//        let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
-//        tap.numberOfTapsRequired = 1
-//        tap.numberOfTouchesRequired = 1
-//        scnView.gestureRecognizers = [tap]
+        //botao
+        let buttonGeometry = SCNBox(width: 2.5, height: 2, length: 1, chamferRadius: 0.3)//SCNSphere(radius: 1)
+        buttonGeometry.firstMaterial?.diffuse.contents = UIImage(named: "mais2.jpg")
+        button = SCNNode(geometry: buttonGeometry)
+        button.position = SCNVector3(x: 1.5, y: -15, z: 0)
+        scnView.scene?.rootNode.addChildNode(button)
         
-//        let buttonGeometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 0.3)
-//        buttonGeometry.firstMaterial?.diffuse.contents = UIImage(named: "universo.png")
-//        button = SCNNode(geometry: buttonGeometry)
-//        button.position = SCNVector3(x: 5, y: 0.5, z: -30)
-//        scnView.scene?.rootNode.addChildNode(button)
-//        
+        //tap para o botao
+        let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
+        tap.numberOfTapsRequired = 1
+        tap.numberOfTouchesRequired = 1
+        scnView.gestureRecognizers = [tap]
+        
+        
+        //tap para mexer no fundo
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
+        scnView.addGestureRecognizer(panRecognizer)
+        geometryNode = scnView.scene!.rootNode
+        
     }
     
-//    func sceneTap(recognizer: UITapGestureRecognizer) {
-//
-//        let location = recognizer.locationInView(scnView)
-//
-//        let hitResults = scnView.hitTest(location, options: nil)
-//
-//
-//        if hitResults?.count > 0 {
-//            
-//            let result = hitResults![0] as! SCNHitTestResult
-//            let node = result.node
-//            if node == button {
-//                //                SCNTransaction.begin()
-//                //                SCNTransaction.setAnimationDuration(0.5)
-//                //                let materials = node.geometry?.materials as! [SCNMaterial]
-//                //                let material = materials[0]
-//                //                material.diffuse.contents = UIColor.whiteColor()
-//                //                SCNTransaction.commit()
-//                //
-//                //                let action = SCNAction.moveByX(0, y: -0.8, z: 0, duration: 0.5)
-//                //                node.runAction(action)
-//                println("oi")
-//            }
-//        }
-//    }
+    func panGesture(sender: UIPanGestureRecognizer) {
+        let translation = sender.translationInView(sender.view!)
+        var newAngle = (Float)(translation.x)*(Float)(M_PI)/90.0
+        newAngle += currentAngle
+        
+        //diz qual eixo vai girar
+        geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 1, 1, 1)
+        
+        if(sender.state == UIGestureRecognizerState.Ended) {
+            currentAngle = newAngle
+        }
+    }
+
+    
+    func sceneTap(recognizer: UITapGestureRecognizer) {
+
+        let location = recognizer.locationInView(scnView)
+        let hitResults = scnView.hitTest(location, options: nil)
+        if hitResults?.count > 0 {
+            
+            let result = hitResults![0] as! SCNHitTestResult
+            
+            let node = result.node
+            
+            //checa se o node é o node do botao e executa a acao
+            if node == button {
+                
+                println("oi")
+                MySceneView().newSun() //metodo da mysceneview
+            }
+        }
+    }
 
 
     override func didReceiveMemoryWarning() {

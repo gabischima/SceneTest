@@ -31,6 +31,7 @@
 		06CFED731B0EE57600E7481B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06CFED721B0EE57600E7481B /* SpriteKit.framework */; };
 		06CFED751B0F670300E7481B /* planet_water_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED741B0F670300E7481B /* planet_water_texture.png */; };
 		06CFED771B0F68FE00E7481B /* cloud_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 06CFED761B0F68FE00E7481B /* cloud_texture.png */; };
+		6FBA78901B10CBB20042083B /* mais2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FBA788F1B10CBB20042083B /* mais2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		06CFED721B0EE57600E7481B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		06CFED741B0F670300E7481B /* planet_water_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet_water_texture.png; sourceTree = "<group>"; };
 		06CFED761B0F68FE00E7481B /* cloud_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud_texture.png; sourceTree = "<group>"; };
+		6FBA788F1B10CBB20042083B /* mais2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mais2.jpg; path = ../../Downloads/mais2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				06CFED691B0ECE3800E7481B /* star.png */,
 				063433051B043FFB00D164A7 /* Main.storyboard */,
 				063433081B043FFB00D164A7 /* Images.xcassets */,
+				6FBA788F1B10CBB20042083B /* mais2.jpg */,
 				0634330A1B043FFB00D164A7 /* LaunchScreen.xib */,
 				063432FF1B043FFB00D164A7 /* Supporting Files */,
 			);
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06CFED751B0F670300E7481B /* planet_water_texture.png in Resources */,
+				6FBA78901B10CBB20042083B /* mais2.jpg in Resources */,
 				06A6FF701B0E639F00196E91 /* universo5.tga in Resources */,
 				06A6FF6D1B0E639700196E91 /* universo2.tga in Resources */,
 				06A6FF6F1B0E639C00196E91 /* universo4.tga in Resources */,

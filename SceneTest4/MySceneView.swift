@@ -10,16 +10,19 @@ import UIKit
 import SceneKit
 import SpriteKit
 
+
+
+
 class MySceneView: SCNScene {
     
 //    var tete = "teste"
-    var sphereBackground : SCNBox!
+   // var sphereBackground : SCNBox!
     //    let rotate: NSArray!
 
     func createSun(){
         let sun = SCNSphere(radius: 3.0)
-        sun.firstMaterial!.diffuse.contents = UIImage(named: "texture_sun.png")
         let sunNode = SCNNode(geometry: sun)
+        sun.firstMaterial!.diffuse.contents = UIImage(named: "texture_sun.png")
         let rotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
         let repeatedRotate = SCNAction.repeatActionForever(rotate)
         sunNode.runAction(repeatedRotate)
@@ -70,9 +73,7 @@ class MySceneView: SCNScene {
 //        ring.firstMaterial?.diffuse.contents = UIColor.grayColor()
         let ringNode = SCNNode(geometry: ring)
         ring.firstMaterial?.doubleSided = true
-
         let ringNode2 = SCNNode(geometry: ring)
-        
         var pifloat = Float(M_PI)
         ringNode.transform = SCNMatrix4MakeRotation( pifloat, 1, 1, 1)
         ringNode2.transform = SCNMatrix4MakeRotation( 3*pifloat / 2, 1, 1, 1)
@@ -86,7 +87,7 @@ class MySceneView: SCNScene {
         let particleSystem = SCNParticleSystem(named: "MyParticleSystem", inDirectory: nil)
         let systemNode = SCNNode()
         systemNode.addParticleSystem(particleSystem)
-        rootNode.addChildNode(systemNode)
+        self.rootNode.addChildNode(systemNode)
 
 //        sphereBackground = SCNSphere(radius: 100)
 //        sphereBackground.firstMaterial?.diffuse.contents = UIImage(named: "universo1.tga")
@@ -100,6 +101,19 @@ class MySceneView: SCNScene {
 //        sphereBackground.firstMaterial?.doubleSided = true
 //        let spherenode = SCNNode(geometry: sphereBackground)
 //        self.rootNode.addChildNode(spherenode)
+    }
+    
+    func newSun () {
+        
+        let sun2 = SCNSphere(radius: 1.0)
+        let sunNode2 = SCNNode(geometry: sun2)
+        sun2.firstMaterial!.diffuse.contents = UIColor.redColor()
+        sunNode2.position = SCNVector3Make(1, -10, 0)
+//        let rotate2 = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+//        let repeatedRotate2 = SCNAction.repeatActionForever(rotate2)
+//        sunNode2.runAction(repeatedRotate2)
+        self.rootNode.addChildNode(sunNode2)
+        println("oi2")
     }
     
     override init() {
