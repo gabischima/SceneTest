@@ -34,6 +34,7 @@
 		6FBA78901B10CBB20042083B /* mais2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FBA788F1B10CBB20042083B /* mais2.jpg */; };
 		BE5B6AB11B138D82000ED9E9 /* mais2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5B6AB01B138D82000ED9E9 /* mais2.jpg */; };
 		BE5B6AB51B13B896000ED9E9 /* Container1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5B6AB41B13B896000ED9E9 /* Container1ViewController.swift */; };
+		BE5B6AB91B13CB71000ED9E9 /* SphereMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5B6AB81B13CB71000ED9E9 /* SphereMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		6FBA788F1B10CBB20042083B /* mais2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mais2.jpg; path = ../../Downloads/mais2.jpg; sourceTree = "<group>"; };
 		BE5B6AB01B138D82000ED9E9 /* mais2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mais2.jpg; sourceTree = "<group>"; };
 		BE5B6AB41B13B896000ED9E9 /* Container1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container1ViewController.swift; sourceTree = "<group>"; };
+		BE5B6AB81B13CB71000ED9E9 /* SphereMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				06CFED691B0ECE3800E7481B /* star.png */,
 				063433051B043FFB00D164A7 /* Main.storyboard */,
 				BE5B6AB41B13B896000ED9E9 /* Container1ViewController.swift */,
+				BE5B6AB81B13CB71000ED9E9 /* SphereMenu.swift */,
 				063433081B043FFB00D164A7 /* Images.xcassets */,
 				BE5B6AB01B138D82000ED9E9 /* mais2.jpg */,
 				6FBA788F1B10CBB20042083B /* mais2.jpg */,
@@ -298,6 +301,7 @@
 			files = (
 				BE5B6AB51B13B896000ED9E9 /* Container1ViewController.swift in Sources */,
 				063433041B043FFB00D164A7 /* ViewController.swift in Sources */,
+				BE5B6AB91B13CB71000ED9E9 /* SphereMenu.swift in Sources */,
 				063433241B04404C00D164A7 /* MySceneView.swift in Sources */,
 				063433021B043FFB00D164A7 /* AppDelegate.swift in Sources */,
 			);

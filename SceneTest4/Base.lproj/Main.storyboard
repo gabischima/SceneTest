@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ges-JT-15c">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ges-JT-15c">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="phR-eQ-f3g" kind="embed" id="BBE-Mc-Pk5"/>
@@ -24,6 +24,14 @@
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ges-JT-15c" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OJ1-Fk-KtW"/>
+                            <constraint firstAttribute="centerY" secondItem="Ges-JT-15c" secondAttribute="centerY" id="Yjb-d0-6nt"/>
+                            <constraint firstItem="Ges-JT-15c" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="azA-7R-10W"/>
+                            <constraint firstAttribute="centerX" secondItem="Ges-JT-15c" secondAttribute="centerX" id="fVW-dT-A1v"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ges-JT-15c" secondAttribute="bottom" id="mXh-hV-OBu"/>
+                            <constraint firstAttribute="trailing" secondItem="Ges-JT-15c" secondAttribute="trailing" id="yP7-bp-Dnl"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

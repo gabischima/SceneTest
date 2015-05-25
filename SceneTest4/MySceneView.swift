@@ -11,6 +11,12 @@ import SceneKit
 import SpriteKit
 
 
+let sun = SCNSphere(radius: 3.0)
+let sunNode = SCNNode(geometry: sun)
+
+let planet = SCNSphere(radius: 1.0)
+let planetNode = SCNNode(geometry: planet)
+
 
 
 class MySceneView: SCNScene {
@@ -19,17 +25,14 @@ class MySceneView: SCNScene {
     //    let rotate: NSArray!
 
     func createSun(){
-        let sun = SCNSphere(radius: 3.0)
-        let sunNode = SCNNode(geometry: sun)
         sun.firstMaterial!.diffuse.contents = UIImage(named: "texture_sun.png")
         let rotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
         let repeatedRotate = SCNAction.repeatActionForever(rotate)
         sunNode.runAction(repeatedRotate)
         self.rootNode.addChildNode(sunNode)
         
-        let planet = SCNSphere(radius: 1.0)
+        
         planet.firstMaterial!.diffuse.contents = UIImage(named: "planet_water_texture.png")
-        let planetNode = SCNNode(geometry: planet)
         let planetRotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
         planetNode.position = SCNVector3Make(8, 0, 0)
         let repeatedPlanetRotate = SCNAction.repeatActionForever(planetRotate)
@@ -103,18 +106,41 @@ class MySceneView: SCNScene {
     }
     
     func newSun () {
-        
-        //let sun2 = SCNSphere(radius: 3.0)
+       
         let sunNode2 = SCNNode(geometry: SCNSphere(radius: 2.0));
-        sunNode2.geometry!.firstMaterial?.diffuse.contents = UIImage(named: "planet_water_texture.png")
-        
-        //sun2.firstMaterial!.diffuse.contents = UIColor.redColor()
+        sunNode2.geometry!.firstMaterial?.diffuse.contents = UIColor.redColor()
         sunNode2.position = SCNVector3Make(-1, 6, 0)
         let rotate2 = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
         let repeatedRotate2 = SCNAction.repeatActionForever(rotate2)
         sunNode2.runAction(repeatedRotate2)
         self.rootNode.addChildNode(sunNode2)
         println("oi2")
+    }
+    
+    func newPlanet () {
+        
+        let planet2 = SCNSphere(radius: 1.0)
+        planet2.firstMaterial!.diffuse.contents = UIColor.greenColor()
+        let planetNode2 = SCNNode(geometry: planet2)
+        let planetRotate2 = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+        planetNode2.position = SCNVector3Make(10, 3, 2)
+        let repeatedPlanetRotate = SCNAction.repeatActionForever(planetRotate2)
+        planetNode2.runAction(repeatedPlanetRotate)
+        sunNode.addChildNode(planetNode2)
+
+        
+    }
+    
+    func newMoon() {
+        let moon = SCNSphere(radius: 0.3)
+        moon.firstMaterial!.diffuse.contents = UIColor.grayColor()
+        let moonNode = SCNNode(geometry: moon)
+        let moonRotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+        moonNode.position = SCNVector3Make(2, 0, 0)
+        let repeatedMoonRotate = SCNAction.repeatActionForever(moonRotate)
+        moonNode.runAction(repeatedMoonRotate)
+        planetNode.addChildNode(moonNode)
+        
     }
     
     override init() {

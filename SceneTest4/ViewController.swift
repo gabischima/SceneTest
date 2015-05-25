@@ -52,43 +52,43 @@ class ViewController: UIViewController {
         
         
         //tap para mexer no fundo
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
-        scnView.addGestureRecognizer(panRecognizer)
-        geometryNode = scnView.scene!.rootNode
+//        let panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
+//        scnView.addGestureRecognizer(panRecognizer)
+//        geometryNode = scnView.scene!.rootNode
 //
     }
     
-    func panGesture(sender: UIPanGestureRecognizer) {
-        let translation = sender.translationInView(sender.view!)
-        var newAngle = (Float)(translation.x)*(Float)(M_PI)/90.0
-        newAngle += currentAngle
-        
-        //diz qual eixo vai girar
-        geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 1, 1, 1)
-        
-        if(sender.state == UIGestureRecognizerState.Ended) {
-            currentAngle = newAngle
-        }
-    }
-
-    
-    func sceneTap(recognizer: UITapGestureRecognizer) {
-
-        let location = recognizer.locationInView(scnView)
-        let hitResults = scnView.hitTest(location, options: nil)
-        if hitResults?.count > 0 {
-            
-            let result = hitResults![0] as! SCNHitTestResult
-            
-            let node = result.node
-            
-            //checa se o node é o node do botao e executa a acao
-            if node == button {
-                println("oi")
-                (scnView.scene as! MySceneView).newSun() //metodo da mysceneview
-            }
-        }
-    }
+//    func panGesture(sender: UIPanGestureRecognizer) {
+//        let translation = sender.translationInView(sender.view!)
+//        var newAngle = (Float)(translation.x)*(Float)(M_PI)/90.0
+//        newAngle += currentAngle
+//        
+//        //diz qual eixo vai girar
+//        geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 1, 1, 1)
+//        
+//        if(sender.state == UIGestureRecognizerState.Ended) {
+//            currentAngle = newAngle
+//        }
+//    }
+//
+//    
+//    func sceneTap(recognizer: UITapGestureRecognizer) {
+//
+//        let location = recognizer.locationInView(scnView)
+//        let hitResults = scnView.hitTest(location, options: nil)
+//        if hitResults?.count > 0 {
+//            
+//            let result = hitResults![0] as! SCNHitTestResult
+//            
+//            let node = result.node
+//            
+//            //checa se o node é o node do botao e executa a acao
+//            if node == button {
+//                println("oi")
+//                (scnView.scene as! MySceneView).newSun() //metodo da mysceneview
+//            }
+//        }
+ //   }
 
 
     override func didReceiveMemoryWarning() {
