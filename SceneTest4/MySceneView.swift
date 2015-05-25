@@ -14,7 +14,6 @@ import SpriteKit
 
 
 class MySceneView: SCNScene {
-    
 //    var tete = "teste"
    // var sphereBackground : SCNBox!
     //    let rotate: NSArray!
@@ -105,21 +104,23 @@ class MySceneView: SCNScene {
     
     func newSun () {
         
-        let sun2 = SCNSphere(radius: 1.0)
-        let sunNode2 = SCNNode(geometry: sun2)
-        sun2.firstMaterial!.diffuse.contents = UIColor.redColor()
-        sunNode2.position = SCNVector3Make(1, -10, 0)
-//        let rotate2 = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
-//        let repeatedRotate2 = SCNAction.repeatActionForever(rotate2)
-//        sunNode2.runAction(repeatedRotate2)
+        //let sun2 = SCNSphere(radius: 3.0)
+        let sunNode2 = SCNNode(geometry: SCNSphere(radius: 2.0));
+        sunNode2.geometry!.firstMaterial?.diffuse.contents = UIImage(named: "planet_water_texture.png")
+        
+        //sun2.firstMaterial!.diffuse.contents = UIColor.redColor()
+        sunNode2.position = SCNVector3Make(-1, 6, 0)
+        let rotate2 = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+        let repeatedRotate2 = SCNAction.repeatActionForever(rotate2)
+        sunNode2.runAction(repeatedRotate2)
         self.rootNode.addChildNode(sunNode2)
         println("oi2")
     }
     
     override init() {
         super.init()
-        createSun()
         createbackground()
+        createSun()
     }
     
     required init(coder aDecoder: NSCoder) {

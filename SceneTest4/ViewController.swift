@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         scnView = self.view as! SCNView
         
         scnView.scene = MySceneView();
@@ -39,24 +38,24 @@ class ViewController: UIViewController {
         scnView.allowsCameraControl = true
         
         //botao
-        let buttonGeometry = SCNBox(width: 2.5, height: 2, length: 1, chamferRadius: 0.3)//SCNSphere(radius: 1)
-        buttonGeometry.firstMaterial?.diffuse.contents = UIImage(named: "mais2.jpg")
-        button = SCNNode(geometry: buttonGeometry)
-        button.position = SCNVector3(x: 1.5, y: -15, z: 0)
-        scnView.scene?.rootNode.addChildNode(button)
+//        let buttonGeometry = SCNBox(width: 2.5, height: 2, length: 1, chamferRadius: 0.3)//SCNSphere(radius: 1)
+//        buttonGeometry.firstMaterial?.diffuse.contents = UIImage(named: "mais2.jpg")
+//        button = SCNNode(geometry: buttonGeometry)
+//        button.position = SCNVector3(x: 1.5, y: -15, z: 0)
+//        scnView.scene?.rootNode.addChildNode(button)
         
         //tap para o botao
-        let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
-        tap.numberOfTapsRequired = 1
-        tap.numberOfTouchesRequired = 1
-        scnView.gestureRecognizers = [tap]
+//        let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
+//        tap.numberOfTapsRequired = 1
+//        tap.numberOfTouchesRequired = 1
+//        scnView.gestureRecognizers = [tap]
         
         
         //tap para mexer no fundo
         let panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
         scnView.addGestureRecognizer(panRecognizer)
         geometryNode = scnView.scene!.rootNode
-        
+//
     }
     
     func panGesture(sender: UIPanGestureRecognizer) {
@@ -85,9 +84,8 @@ class ViewController: UIViewController {
             
             //checa se o node é o node do botao e executa a acao
             if node == button {
-                
                 println("oi")
-                MySceneView().newSun() //metodo da mysceneview
+                (scnView.scene as! MySceneView).newSun() //metodo da mysceneview
             }
         }
     }
