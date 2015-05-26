@@ -145,6 +145,8 @@ class SphereMenu:UIView, UICollisionBehaviorDelegate{
     }
     
     func startTapped(gesture:UITapGestureRecognizer){
+
+        
         self.animator?.removeBehavior(self.collision)
         self.animator?.removeBehavior(self.itemBehavior)
         self.removeSnapBehaviors()
@@ -208,6 +210,8 @@ class SphereMenu:UIView, UICollisionBehaviorDelegate{
         }
         self.expanded = false;
         self.superview?.removeGestureRecognizer(self.dismissTap!)
+        start?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        println("oi")
     }
     
     func expandSubmenu(){
@@ -216,6 +220,8 @@ class SphereMenu:UIView, UICollisionBehaviorDelegate{
         }
         self.expanded = true;
         self.superview?.addGestureRecognizer(self.dismissTap!)
+        start?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+        println("oie")
     }
     
     func snapToStartWithIndex(index:Int)
