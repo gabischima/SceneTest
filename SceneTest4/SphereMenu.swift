@@ -153,6 +153,7 @@ class SphereMenu:UIView, UICollisionBehaviorDelegate{
             self.shrinkSubmenu()
             start?.animationDuration
             
+            
         } else {
             self.expandSubmenu()
             

@@ -18,10 +18,9 @@ class ViewController: UIViewController {
     var clickcount = 0
     
     // Geometry
-    var geometryNode: SCNNode = SCNNode()
+    var geometryNode = SCNNode()
     
     let cameraNode = SCNNode()
-
     
     // Gestures
     var currentAngle: Float = 0.0
@@ -29,20 +28,29 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         
+        super.viewDidAppear(animated)
+
         setupScene()
         
         let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
         tap.numberOfTapsRequired = 1
         tap.numberOfTouchesRequired = 1
-        scnView.gestureRecognizers = [tap]
+        
+        geometryNode.position = SCNVector3Make(0, 30, 0)
+        
+        scnView.scene!.rootNode.addChildNode(geometryNode)
         
         let buttonGeometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 0.3)
         buttonGeometry.firstMaterial?.diffuse.contents = UIColor.redColor()
         button = SCNNode(geometry: buttonGeometry)
         button.position = SCNVector3(x: 5, y: 0.5, z: -30)
         scnView.scene?.rootNode.addChildNode(button)
-        geometryNode = button
+        
+        geometryNode.addChildNode(cameraNode)
     }
     
     func sceneTap(recognizer: UITapGestureRecognizer) {
@@ -73,14 +81,7 @@ class ViewController: UIViewController {
                     SCNTransaction.commit()
                     clickcount = 0
                 }
-                
-                
-                //                let action = SCNAction.moveByX(0, y: -0.8, z: 0, duration: 0.5)
-                //                node.runAction(action)
-                //                println("oi")
             }
-            
-            
         }
     }
     
@@ -89,37 +90,39 @@ class ViewController: UIViewController {
         scnView = self.view as! SCNView
         
         scnView.scene = MySceneView()
-        
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
-        scnView.addGestureRecognizer(panRecognizer)
+
         scnView.backgroundColor = UIColor.blackColor()
         
         cameraNode.camera = SCNCamera()
         cameraNode.camera!.zFar = 200
         cameraNode.camera!.yFov = 50
         cameraNode.camera!.xFov = 50
-        
-        cameraNode.position = SCNVector3Make(0, 30, 50);
-        cameraNode.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75));
+
+        cameraNode.position = SCNVector3Make(0, 0, 30)
+//        cameraNode.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
         
         scnView.pointOfView = cameraNode
         
-        scnView.scene!.rootNode.addChildNode(cameraNode)
-        
-        
         scnView.autoenablesDefaultLighting = true
+        
+        
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
+        scnView.addGestureRecognizer(panRecognizer)
         
     }
     
     func panGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translationInView(sender.view!)
-        var newAngle = (Float)(translation.x)*(Float)(M_PI)/180.0
-        newAngle += currentAngle
+        var angleX = (Float)(translation.x)*(Float)(M_PI)/180.0
+        var angleZ = (Float)(translation.x)*(Float)(M_PI_2)/180.0
+
+        angleX += currentAngle
         
-        button.transform = SCNMatrix4MakeRotation(newAngle, 0, 1, 0)
+        geometryNode.transform = SCNMatrix4MakeRotation(angleX, 0, 1, 0)
+//        cameraNode.transform = SCNMatrix4MakeTranslation(angleX*10, 0, 0)
         
         if(sender.state == UIGestureRecognizerState.Ended) {
-            currentAngle = newAngle
+            currentAngle = angleX
             println(currentAngle)
         }
     }
@@ -142,6 +145,13 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Transition
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        scnView.stop(nil)
+        scnView.play(nil)
     }
 }
 
