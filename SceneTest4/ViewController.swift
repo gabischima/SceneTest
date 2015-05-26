@@ -10,7 +10,7 @@ import UIKit
 import SceneKit
 
 class ViewController: UIViewController {
-
+    
     var button : SCNNode!
     
     var scnView: SCNView!
@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         
         scnView.scene = MySceneView();
         scnView.backgroundColor = UIColor.blackColor()
+        
+        scnView.showsStatistics = true
 //
 //        let cameraNode = SCNNode()
 //        cameraNode.camera = SCNCamera()
