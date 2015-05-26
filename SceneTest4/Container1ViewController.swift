@@ -23,7 +23,10 @@ class Container1ViewController: UIViewController, SphereMenuDelegate {
         let image2 = UIImage(named: "icon-email")
         let image3 = UIImage(named: "icon-facebook")
         var images:[UIImage] = [image1!,image2!,image3!]
-        var menu = SphereMenu(startPoint: CGPointMake(200, 600), startImage: start!, submenuImages:images, tapToDismiss:true)
+        
+        var point = CGPointMake(view.frame.size.width - (start!.size.width)/2, view.frame.size.height - (start!.size.height)/2)
+
+        var menu = SphereMenu(startPoint: point, startImage: start!, submenuImages:images, tapToDismiss:true)
         menu.delegate = self
         self.view.addSubview(menu)
 
