@@ -23,26 +23,26 @@ class MySceneView: SCNScene {
 
     func createSun(){
         sun.firstMaterial!.diffuse.contents = UIImage(named: "texture_sun.png")
-//        let rotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
-//        let repeatedRotate = SCNAction.repeatActionForever(rotate)
-//        sunNode.runAction(repeatedRotate)
+        let rotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+        let repeatedRotate = SCNAction.repeatActionForever(rotate)
+        sunNode.runAction(repeatedRotate)
         self.rootNode.addChildNode(sunNode)
         
         
         planet.firstMaterial!.diffuse.contents = UIImage(named: "planet_water_texture.png")
         let planetRotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
         planetNode.position = SCNVector3Make(8, 0, 0)
-//        let repeatedPlanetRotate = SCNAction.repeatActionForever(planetRotate)
-//        planetNode.runAction(repeatedPlanetRotate)
+        let repeatedPlanetRotate = SCNAction.repeatActionForever(planetRotate)
+        planetNode.runAction(repeatedPlanetRotate)
         sunNode.addChildNode(planetNode)
         
         let cloud = SCNSphere(radius: 1.2)
         cloud.firstMaterial!.diffuse.contents = UIImage(named: "cloud_texture.png")
         let cloudNode = SCNNode(geometry: cloud)
-//        let cloudRotate = SCNAction.rotateByX(0, y: 0.5, z: 0, duration: 1.0)
+        let cloudRotate = SCNAction.rotateByX(0, y: 0.5, z: 0, duration: 1.0)
         cloudNode.position = SCNVector3Make(8, 0, 0)
-//        let repeatedCloudRotate = SCNAction.repeatActionForever(cloudRotate)
-//        cloudNode.runAction(repeatedCloudRotate)
+        let repeatedCloudRotate = SCNAction.repeatActionForever(cloudRotate)
+        cloudNode.runAction(repeatedCloudRotate)
         sunNode.addChildNode(cloudNode)
         
 //        var labelNode = SKLabelNode(text: "Hello")

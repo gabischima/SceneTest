@@ -21,7 +21,8 @@ class ViewController: UIViewController {
     var geometryNode = SCNNode()
     
     let cameraNode = SCNNode()
-    
+    let cameraNode2 = SCNNode()
+
     // Gestures
     var currentAngle: Float = 0.0
     
@@ -39,10 +40,7 @@ class ViewController: UIViewController {
         let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
         tap.numberOfTapsRequired = 1
         tap.numberOfTouchesRequired = 1
-        
-        geometryNode.position = SCNVector3Make(0, 30, 0)
-        
-        scnView.scene!.rootNode.addChildNode(geometryNode)
+        scnView.addGestureRecognizer(tap)
         
         let buttonGeometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 0.3)
         buttonGeometry.firstMaterial?.diffuse.contents = UIColor.redColor()
@@ -50,7 +48,7 @@ class ViewController: UIViewController {
         button.position = SCNVector3(x: 5, y: 0.5, z: -30)
         scnView.scene?.rootNode.addChildNode(button)
         
-        geometryNode.addChildNode(cameraNode)
+
     }
     
     func sceneTap(recognizer: UITapGestureRecognizer) {
@@ -63,15 +61,26 @@ class ViewController: UIViewController {
             
             let result = hitResults![0] as! SCNHitTestResult
             let node = result.node
+
             if node == button {
                 let materials = node.geometry?.materials as! [SCNMaterial]
                 let material = materials[0]
+                
+//                button.camera = [SCNCamera camera1]
+//                scnView.pointOfView = button;
                 
                 if clickcount == 0 {
                     SCNTransaction.begin()
                     SCNTransaction.setAnimationDuration(0.5)
                     material.diffuse.contents = UIColor.whiteColor()
+                    
+                    
+//                    secondCamera()
+//                    button.addChildNode(cameraNode2)
+//                    scnView.scene?.rootNode.addChildNode(node)
+                    
                     SCNTransaction.commit()
+
                     clickcount++
                 }
                 else {
@@ -92,14 +101,9 @@ class ViewController: UIViewController {
         scnView.scene = MySceneView()
 
         scnView.backgroundColor = UIColor.blackColor()
-        
         cameraNode.camera = SCNCamera()
-        cameraNode.camera!.zFar = 200
-        cameraNode.camera!.yFov = 50
-        cameraNode.camera!.xFov = 50
 
-        cameraNode.position = SCNVector3Make(0, 0, 30)
-//        cameraNode.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
+        cameraPosition()
         
         scnView.pointOfView = cameraNode
         
@@ -111,18 +115,38 @@ class ViewController: UIViewController {
         
     }
     
+    func cameraPosition(){
+        cameraNode2.camera = SCNCamera()
+        geometryNode.position = SCNVector3Make(0, 50, 0)
+        cameraNode.camera!.zFar = 200
+        cameraNode.position = SCNVector3Make(0, 0, 50)
+        cameraNode.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
+        cameraNode.camera!.yFov = 50
+        cameraNode.camera!.xFov = 50
+        geometryNode.addChildNode(cameraNode)
+        scnView.scene!.rootNode.addChildNode(geometryNode)
+    }
+    
+//    func secondCamera(){
+//        cameraNode2.camera!.zFar = 200
+//        cameraNode2.position = SCNVector3Make(0, 0, 50)
+//        cameraNode2.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
+//        cameraNode2.camera!.yFov = 50
+//        cameraNode2.camera!.xFov = 50
+//        scnView.pointOfView = cameraNode2
+//    }
+    
     func panGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translationInView(sender.view!)
-        var angleX = (Float)(translation.x)*(Float)(M_PI)/180.0
-        var angleZ = (Float)(translation.x)*(Float)(M_PI_2)/180.0
-
-        angleX += currentAngle
-        
-        geometryNode.transform = SCNMatrix4MakeRotation(angleX, 0, 1, 0)
-//        cameraNode.transform = SCNMatrix4MakeTranslation(angleX*10, 0, 0)
+        var angle = (Float)(translation.x)*(Float)(M_PI)/180.0
+        angle += currentAngle
+        geometryNode.transform = SCNMatrix4MakeRotation(angle, 0, 1, 0)
+        cameraPosition()
         
         if(sender.state == UIGestureRecognizerState.Ended) {
-            currentAngle = angleX
+            currentAngle = angle
+            cameraPosition()
+            
             println(currentAngle)
         }
     }
