@@ -12,11 +12,8 @@ import SceneKit
 class ViewController: UIViewController {
     
     var button : SCNNode!
-    
     var scnView: SCNView!
-    
     var clickcount = 0
-    
     var selectedNode: SCNNode!
     var nodeRadius: CGFloat!
     
@@ -41,11 +38,6 @@ class ViewController: UIViewController {
 
         setupScene()
         
-//        let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
-//        tap.numberOfTapsRequired = 1
-//        tap.numberOfTouchesRequired = 1
-//        scnView.addGestureRecognizer(tap)
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: "sceneTap:")
         var gestureRecognizers = [AnyObject]()
         gestureRecognizers.append(tapGesture)
@@ -65,19 +57,13 @@ class ViewController: UIViewController {
     
     func sceneTap(gestureRecognize: UIGestureRecognizer) {
         
-        println("CHAMADA")
-        
-//        let location = recognizer.locationInView(scnView)
-//        
-//        let hitResults = scnView.hitTest(location, options: nil)
-        
         let scnView = self.view as! SCNView
         
         let p = gestureRecognize.locationInView(scnView)
         
         if let hitResults = scnView.hitTest(p, options: nil) {
             
-            if hitResults.count > 0 {
+            if hitResults.count > 0 && hitResults[0].node!.geometry! .isKindOfClass(SCNSphere) {
                 
                 let result: AnyObject! = hitResults[0]
                 
@@ -90,28 +76,20 @@ class ViewController: UIViewController {
                 self.cameraPosition2(self.selectedNode)
                 
                 SCNTransaction.begin()
-                SCNTransaction.setAnimationDuration(5.5)
+                SCNTransaction.setAnimationDuration(1.0)
                 
-//                SCNTransaction.setCompletionBlock({
-//                    
-//                    SCNTransaction.begin()
-//                    SCNTransaction.setAnimationDuration(0.5)
+                println("ZOOM IN")
                 
                     scnView.pointOfView = self.cameraNode2
-                    
-//                    SCNTransaction.commit()
-                
-//                })
-                
-//                self.cameraPosition()
-//                scnView.pointOfView = self.cameraNode
                 
                 SCNTransaction.commit()
             }
             else {
                 
                 SCNTransaction.begin()
-                SCNTransaction.setAnimationDuration(5.5)
+                SCNTransaction.setAnimationDuration(1.0)
+                
+                println("ZOOM OUT")
                 
                 self.cameraPosition()
                 scnView.pointOfView = self.cameraNode
@@ -119,42 +97,6 @@ class ViewController: UIViewController {
                 SCNTransaction.commit()
             }
         }
-        
-//        if hitResults?.count > 0 {
-//            
-//            let result = hitResults![0] as! SCNHitTestResult
-//            let node = result.node
-//
-//            if node == button {
-//                let materials = node.geometry?.materials as! [SCNMaterial]
-//                let material = materials[0]
-//                
-////                button.camera = [SCNCamera camera1]
-////                scnView.pointOfView = button;
-//                
-//                if clickcount == 0 {
-//                    SCNTransaction.begin()
-//                    SCNTransaction.setAnimationDuration(0.5)
-//                    material.diffuse.contents = UIColor.whiteColor()
-//                    
-//                    
-////                    secondCamera()
-////                    button.addChildNode(cameraNode2)
-////                    scnView.scene?.rootNode.addChildNode(node)
-//                    
-//                    SCNTransaction.commit()
-//
-//                    clickcount++
-//                }
-//                else {
-//                    SCNTransaction.begin()
-//                    SCNTransaction.setAnimationDuration(0.5)
-//                    material.diffuse.contents = UIColor.redColor()
-//                    SCNTransaction.commit()
-//                    clickcount = 0
-//                }
-//            }
-//        }
     }
     
     func setupScene(){
@@ -197,28 +139,20 @@ class ViewController: UIViewController {
     func cameraPosition2(selectedNode: SCNNode){
         geometryNode2.position = selectedNode.position
         cameraNode2.camera!.zFar = 200
-        cameraNode2.position = SCNVector3Make(0, 0, 50)
+        cameraNode2.position = SCNVector3Make(selectedNode.position.x, selectedNode.position.y + (4.0*Float(nodeRadius)), (selectedNode.position.z) + (7.0*Float(nodeRadius)))
         cameraNode2.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
         cameraNode2.camera!.yFov = 50
         cameraNode2.camera!.xFov = 50
         geometryNode2.addChildNode(cameraNode2)
-        selectedNode.addChildNode(geometryNode2)
+        scnView.scene?.rootNode.addChildNode(geometryNode2)
     }
-    
-//    func secondCamera(){
-//        cameraNode2.camera!.zFar = 200
-//        cameraNode2.position = SCNVector3Make(0, 0, 50)
-//        cameraNode2.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
-//        cameraNode2.camera!.yFov = 50
-//        cameraNode2.camera!.xFov = 50
-//        scnView.pointOfView = cameraNode2
-//    }
     
     func panGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translationInView(sender.view!)
         var angle = (Float)(translation.x)*(Float)(M_PI)/180.0
         angle += currentAngle
         geometryNode.transform = SCNMatrix4MakeRotation(angle, 0, 1, 0)
+        geometryNode2.transform = SCNMatrix4MakeRotation(angle, 0, 1, 0)
         cameraPosition()
         
         if(sender.state == UIGestureRecognizerState.Ended) {
@@ -228,21 +162,6 @@ class ViewController: UIViewController {
             println(currentAngle)
         }
     }
-    
-    
-    //    func checkIfFirstTime(){
-    //        // não é primeiro launch
-    //        if firstLaunch  {
-    //            println("Not first launch.")
-    //            blackScreen.hidden = true
-    //        }
-    //        // é primeiro launch
-    //        else {
-    //            println("First launch, setting NSUserDefault.")
-    //            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
-    //            blackScreen.hidden = false
-    //        }
-    //    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

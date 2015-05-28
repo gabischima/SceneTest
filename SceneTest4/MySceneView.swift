@@ -21,7 +21,7 @@ let planetNode = SCNNode(geometry: planet)
 
 class MySceneView: SCNScene {
 
-    func createSun(){
+        func createSun(){
         sun.firstMaterial!.diffuse.contents = UIImage(named: "texture_sun.png")
         let rotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
         let repeatedRotate = SCNAction.repeatActionForever(rotate)
@@ -30,7 +30,7 @@ class MySceneView: SCNScene {
         
         
         planet.firstMaterial!.diffuse.contents = UIImage(named: "planet_water_texture.png")
-        let planetRotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+        let planetRotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 0.5)
         planetNode.position = SCNVector3Make(8, 0, 0)
         let repeatedPlanetRotate = SCNAction.repeatActionForever(planetRotate)
         planetNode.runAction(repeatedPlanetRotate)
@@ -78,7 +78,6 @@ class MySceneView: SCNScene {
         ringNode2.transform = SCNMatrix4MakeRotation( 3*pifloat / 2, 1, 1, 1)
         sunNode.addChildNode(ringNode)
         sunNode.addChildNode(ringNode2)
-        
     }
     
     func createbackground(){
