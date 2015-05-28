@@ -17,8 +17,12 @@ class ViewController: UIViewController {
     
     var clickcount = 0
     
+    var selectedNode: SCNNode!
+    var nodeRadius: CGFloat!
+    
     // Geometry
     var geometryNode = SCNNode()
+    var geometryNode2 = SCNNode()
     
     let cameraNode = SCNNode()
     let cameraNode2 = SCNNode()
@@ -37,10 +41,18 @@ class ViewController: UIViewController {
 
         setupScene()
         
-        let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
-        tap.numberOfTapsRequired = 1
-        tap.numberOfTouchesRequired = 1
-        scnView.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target:self, action: "sceneTap:")
+//        tap.numberOfTapsRequired = 1
+//        tap.numberOfTouchesRequired = 1
+//        scnView.addGestureRecognizer(tap)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: "sceneTap:")
+        var gestureRecognizers = [AnyObject]()
+        gestureRecognizers.append(tapGesture)
+        if let existingGestureRecognizers = scnView.gestureRecognizers {
+            gestureRecognizers.extend(existingGestureRecognizers)
+        }
+        scnView.gestureRecognizers = gestureRecognizers
         
         let buttonGeometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 0.3)
         buttonGeometry.firstMaterial?.diffuse.contents = UIColor.redColor()
@@ -51,47 +63,98 @@ class ViewController: UIViewController {
 
     }
     
-    func sceneTap(recognizer: UITapGestureRecognizer) {
+    func sceneTap(gestureRecognize: UIGestureRecognizer) {
         
-        let location = recognizer.locationInView(scnView)
+        println("CHAMADA")
         
-        let hitResults = scnView.hitTest(location, options: nil)
+//        let location = recognizer.locationInView(scnView)
+//        
+//        let hitResults = scnView.hitTest(location, options: nil)
         
-        if hitResults?.count > 0 {
+        let scnView = self.view as! SCNView
+        
+        let p = gestureRecognize.locationInView(scnView)
+        
+        if let hitResults = scnView.hitTest(p, options: nil) {
             
-            let result = hitResults![0] as! SCNHitTestResult
-            let node = result.node
-
-            if node == button {
-                let materials = node.geometry?.materials as! [SCNMaterial]
-                let material = materials[0]
+            if hitResults.count > 0 {
                 
-//                button.camera = [SCNCamera camera1]
-//                scnView.pointOfView = button;
+                let result: AnyObject! = hitResults[0]
                 
-                if clickcount == 0 {
-                    SCNTransaction.begin()
-                    SCNTransaction.setAnimationDuration(0.5)
-                    material.diffuse.contents = UIColor.whiteColor()
+                selectedNode = result.node
+                
+                nodeRadius = (result.node!.geometry! as! SCNSphere).radius
+                
+                let material = result.node!.geometry!.firstMaterial!
+                
+                self.cameraPosition2(self.selectedNode)
+                
+                SCNTransaction.begin()
+                SCNTransaction.setAnimationDuration(5.5)
+                
+//                SCNTransaction.setCompletionBlock({
+//                    
+//                    SCNTransaction.begin()
+//                    SCNTransaction.setAnimationDuration(0.5)
+                
+                    scnView.pointOfView = self.cameraNode2
                     
-                    
-//                    secondCamera()
-//                    button.addChildNode(cameraNode2)
-//                    scnView.scene?.rootNode.addChildNode(node)
-                    
-                    SCNTransaction.commit()
-
-                    clickcount++
-                }
-                else {
-                    SCNTransaction.begin()
-                    SCNTransaction.setAnimationDuration(0.5)
-                    material.diffuse.contents = UIColor.redColor()
-                    SCNTransaction.commit()
-                    clickcount = 0
-                }
+//                    SCNTransaction.commit()
+                
+//                })
+                
+//                self.cameraPosition()
+//                scnView.pointOfView = self.cameraNode
+                
+                SCNTransaction.commit()
+            }
+            else {
+                
+                SCNTransaction.begin()
+                SCNTransaction.setAnimationDuration(5.5)
+                
+                self.cameraPosition()
+                scnView.pointOfView = self.cameraNode
+                
+                SCNTransaction.commit()
             }
         }
+        
+//        if hitResults?.count > 0 {
+//            
+//            let result = hitResults![0] as! SCNHitTestResult
+//            let node = result.node
+//
+//            if node == button {
+//                let materials = node.geometry?.materials as! [SCNMaterial]
+//                let material = materials[0]
+//                
+////                button.camera = [SCNCamera camera1]
+////                scnView.pointOfView = button;
+//                
+//                if clickcount == 0 {
+//                    SCNTransaction.begin()
+//                    SCNTransaction.setAnimationDuration(0.5)
+//                    material.diffuse.contents = UIColor.whiteColor()
+//                    
+//                    
+////                    secondCamera()
+////                    button.addChildNode(cameraNode2)
+////                    scnView.scene?.rootNode.addChildNode(node)
+//                    
+//                    SCNTransaction.commit()
+//
+//                    clickcount++
+//                }
+//                else {
+//                    SCNTransaction.begin()
+//                    SCNTransaction.setAnimationDuration(0.5)
+//                    material.diffuse.contents = UIColor.redColor()
+//                    SCNTransaction.commit()
+//                    clickcount = 0
+//                }
+//            }
+//        }
     }
     
     func setupScene(){
@@ -101,11 +164,16 @@ class ViewController: UIViewController {
         scnView.scene = MySceneView()
 
         scnView.backgroundColor = UIColor.blackColor()
+        
         cameraNode.camera = SCNCamera()
+        cameraNode2.camera = SCNCamera()
+        
 
         cameraPosition()
+//        cameraPosition2()
         
         scnView.pointOfView = cameraNode
+        
         
         scnView.autoenablesDefaultLighting = true
         
@@ -116,7 +184,6 @@ class ViewController: UIViewController {
     }
     
     func cameraPosition(){
-        cameraNode2.camera = SCNCamera()
         geometryNode.position = SCNVector3Make(0, 50, 0)
         cameraNode.camera!.zFar = 200
         cameraNode.position = SCNVector3Make(0, 0, 50)
@@ -125,6 +192,17 @@ class ViewController: UIViewController {
         cameraNode.camera!.xFov = 50
         geometryNode.addChildNode(cameraNode)
         scnView.scene!.rootNode.addChildNode(geometryNode)
+    }
+    
+    func cameraPosition2(selectedNode: SCNNode){
+        geometryNode2.position = selectedNode.position
+        cameraNode2.camera!.zFar = 200
+        cameraNode2.position = SCNVector3Make(0, 0, 50)
+        cameraNode2.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
+        cameraNode2.camera!.yFov = 50
+        cameraNode2.camera!.xFov = 50
+        geometryNode2.addChildNode(cameraNode2)
+        selectedNode.addChildNode(geometryNode2)
     }
     
 //    func secondCamera(){
