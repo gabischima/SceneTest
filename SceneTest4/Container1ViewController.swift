@@ -51,7 +51,7 @@ class Container1ViewController: UIViewController, SphereMenuDelegate {
 //    }
     
     func sphereDidSelected(index: Int) {
-        println("\(index)")
+        println("Index Selected: \(index)")
         
         if(index==0)
         {

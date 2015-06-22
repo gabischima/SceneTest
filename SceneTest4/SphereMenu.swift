@@ -211,7 +211,7 @@ class SphereMenu:UIView, UICollisionBehaviorDelegate{
         self.expanded = false;
         self.superview?.removeGestureRecognizer(self.dismissTap!)
         start?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-        println("oi")
+        println("Plus Menu: Dismissed\n")
     }
     
     func expandSubmenu(){
@@ -221,7 +221,7 @@ class SphereMenu:UIView, UICollisionBehaviorDelegate{
         self.expanded = true;
         self.superview?.addGestureRecognizer(self.dismissTap!)
         start?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
-        println("oie")
+        println("Plus Menu: Pressed")
     }
     
     func snapToStartWithIndex(index:Int)

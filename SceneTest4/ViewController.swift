@@ -9,6 +9,14 @@
 import UIKit
 import SceneKit
 
+let newplanet = SCNSphere(radius: 3.0)
+let newPlanetNode = SCNNode(geometry: newplanet)
+let rotate = SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 1.0)
+let repeatedRotate = SCNAction.repeatActionForever(rotate)
+
+let cameraNode = SCNNode()
+let cameraNode2 = SCNNode()
+
 class ViewController: UIViewController {
     
     var button : SCNNode!
@@ -20,22 +28,28 @@ class ViewController: UIViewController {
     // Geometry
     var geometryNode = SCNNode()
     var geometryNode2 = SCNNode()
-    
-    let cameraNode = SCNNode()
-    let cameraNode2 = SCNNode()
+
+
 
     // Gestures
     var currentAngle: Float = 0.0
     
+    // Nodes
+
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        newplanet.firstMaterial!.diffuse.contents = UIImage(named: "planet_water_texture.png")
+        newPlanetNode.runAction(repeatedRotate)
+
     }
     
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
-
+        
         setupScene()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: "sceneTap:")
@@ -44,6 +58,7 @@ class ViewController: UIViewController {
         if let existingGestureRecognizers = scnView.gestureRecognizers {
             gestureRecognizers.extend(existingGestureRecognizers)
         }
+        
         scnView.gestureRecognizers = gestureRecognizers
         
         let buttonGeometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 0.3)
@@ -51,19 +66,21 @@ class ViewController: UIViewController {
         button = SCNNode(geometry: buttonGeometry)
         button.position = SCNVector3(x: 5, y: 0.5, z: -30)
         scnView.scene?.rootNode.addChildNode(button)
-        
-
     }
     
     func sceneTap(gestureRecognize: UIGestureRecognizer) {
+        
+        println("Been here")
         
         let scnView = self.view as! SCNView
         
         let p = gestureRecognize.locationInView(scnView)
         
+        // If you hit the sun.
+        
         if let hitResults = scnView.hitTest(p, options: nil) {
             
-            if hitResults.count > 0 && hitResults[0].node!.geometry! .isKindOfClass(SCNSphere) {
+            if hitResults.count > 0 && hitResults[0].node!.isEqual(sunNode) {
                 
                 let result: AnyObject! = hitResults[0]
                 
@@ -80,21 +97,122 @@ class ViewController: UIViewController {
                 
                 println("ZOOM IN")
                 
-                    scnView.pointOfView = self.cameraNode2
+                scnView.pointOfView = cameraNode2
                 
                 SCNTransaction.commit()
             }
-            else {
                 
+            // If you hit the box:
+                
+            else if hitResults.count > 0 && hitResults[0].node!.geometry!.isKindOfClass(SCNBox) && scnView.pointOfView == cameraNode2 {
+                
+                if sunNode.parentNode != nil {
+                    
+                    SCNTransaction.begin()
+                    SCNTransaction.setAnimationDuration(1.0)
+                    
+                    self.cameraPosition()
+                    scnView.pointOfView = cameraNode
+                    
+                    SCNTransaction.commit()
+                }
+                
+                // First Animation: newPlanet fades out.
                 SCNTransaction.begin()
                 SCNTransaction.setAnimationDuration(1.0)
                 
-                println("ZOOM OUT")
+//                if sun.firstMaterial?.diffuse.contents.name != "texture_sun.png" {
+//                    
+//                    sun.firstMaterial!.diffuse.contents = UIImage(named: "texture_sun.png")
+//                    planet.firstMaterial?.diffuse.contents = UIImage(named: "planet_water_texture.png")
+//                    sunNode.addChildNode(ringNode)
+//                    sunNode.addChildNode(ringNode2)
+//                }
                 
                 self.cameraPosition()
-                scnView.pointOfView = self.cameraNode
+                scnView.pointOfView = cameraNode
+                println("ZOOM OUT")
+                
+                newPlanetNode.opacity = 0.0
+                
+                // Second Animation: recreates a hidden sun.
+                SCNTransaction.setCompletionBlock {
+                    SCNTransaction.begin()
+                    SCNTransaction.setAnimationDuration(1.0)
+                    
+                    newPlanetNode.removeFromParentNode()
+                    
+                    sunNode.opacity = 0.0
+                    scnView.scene?.rootNode.addChildNode(sunNode)
+                    
+                    // Third Animation: sun fades in.
+                    SCNTransaction.setCompletionBlock {
+                        SCNTransaction.begin()
+                        SCNTransaction.setAnimationDuration(1.0)
+                        
+                        sunNode.opacity = 1.0
+                        
+                        SCNTransaction.commit()
+                    }
+                    
+                    SCNTransaction.commit()
+                }
                 
                 SCNTransaction.commit()
+            }
+                
+            // If you hit the planet and your camera is 2:
+                
+            else if hitResults.count > 0 && (hitResults[0].node!.isEqual(planetNode) || hitResults[0].node!.isEqual(newPlanetNode)) && scnView.pointOfView == cameraNode2 {
+                
+//                planetNode.removeFromParentNode()
+//                scnView.scene?.rootNode.addChildNode(planetNode)
+                
+                //First Animation: Sun fades out.
+                SCNTransaction.begin()
+                SCNTransaction.setAnimationDuration(1.0)
+                
+                sunNode.opacity = 0.0
+                
+                // Second Animation: Creates a hidden newPlanet.
+                SCNTransaction.setCompletionBlock {
+                    SCNTransaction.begin()
+                    SCNTransaction.setAnimationDuration(1.0)
+                    
+                    sunNode.removeFromParentNode()
+                    newPlanetNode.opacity = 0.0
+                    scnView.scene?.rootNode.addChildNode(newPlanetNode)
+                    
+                    // Third Animation: newPlanet fades in.
+                    SCNTransaction.setCompletionBlock {
+                        SCNTransaction.begin()
+                        SCNTransaction.setAnimationDuration(1.0)
+                        
+                        newPlanetNode.opacity = 1.0
+                     
+                        SCNTransaction.commit()
+                    }
+                    
+                    SCNTransaction.commit()
+                }
+
+                SCNTransaction.commit()
+
+//                self.cameraPosition2(self.selectedNode)
+                
+//                ringNode.removeFromParentNode()
+//                ringNode2.removeFromParentNode()
+//                sun.firstMaterial!.diffuse.contents = UIImage(named: "planet_water_texture.png")
+//                planet.firstMaterial?.diffuse.contents = UIColor.grayColor()
+//                println(planet.firstMaterial?.diffuse.contents.description)
+                
+//                sun.firstMaterial?.diffuse.contents = UIImage(named: "planet_water_texture.png")
+//                sunNode.opacity = 1.0
+
+            }
+            else if (hitResults.count > 0 && hitResults[0].node!.isEqual(planetNode) && planet.firstMaterial?.diffuse.contents.isEqual(UIColor.grayColor()) != nil) {
+                
+                println("It's Gray!")
             }
         }
     }
@@ -138,6 +256,9 @@ class ViewController: UIViewController {
     
     func cameraPosition2(selectedNode: SCNNode){
         geometryNode2.position = selectedNode.position
+        let targetNode = SCNLookAtConstraint(target: selectedNode)
+        targetNode.gimbalLockEnabled = true
+        cameraNode2.constraints = [targetNode]
         cameraNode2.camera!.zFar = 200
         cameraNode2.position = SCNVector3Make(selectedNode.position.x, selectedNode.position.y + (4.0*Float(nodeRadius)), (selectedNode.position.z) + (7.0*Float(nodeRadius)))
         cameraNode2.rotation  = SCNVector4Make(1.0, 0.0, 0.0, Float(-M_PI_4*0.75))
